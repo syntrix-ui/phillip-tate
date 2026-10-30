@@ -1,0 +1,50 @@
+---
+import "@/styles/globals.css";
+import Header from "@/components/Header";
+import Hero from "@/components/Hero";
+import StoryAndAuthorShowcase from "@/components/StoryAndAuthorShowcase";
+import AboutTheAuthor from "@/components/AboutTheAuthor";
+import BookSpotlight from "@/components/BookSpotlight";
+import LifeOfCreativity from "@/components/LifeOfCreativity";
+import BookReviewsCarousel from "@/components/BookReviewsCarousel";
+import Footer from "@/components/Footer";
+---
+
+<html lang="en" class="scroll-smooth">
+  <head>
+    <meta charset="utf-8" />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Philip Tate — Official Author Website</title>
+    <meta
+      name="description"
+      content="Official Author Website for Philip Tate. Discover gripping suspense thrillers Thwarted Enemy, Rizzoe's Landing, and mountain tales."
+    />
+  </head>
+  <body class="min-h-screen bg-[#FCFAF7] text-[#2A2421] font-sans antialiased selection:bg-[#B21816] selection:text-white">
+    <!-- 1. Fully Responsive Header Component -->
+    <Header client:load />
+
+    <!-- 2. Editorial High-Aesthetic Hero Section -->
+    <Hero client:load />
+
+    <!-- 3. Upper Section (Sage/Linen): Welcome + From The Author + Video Overlapping Across The Bottom Edge -->
+    <StoryAndAuthorShowcase client:visible />
+
+    <!-- 4. Lower Section (White Background): About The Author directly below the overlapping video -->
+    <AboutTheAuthor client:visible />
+
+    <!-- 5. Botanical Spotlight Section: Rizzoe's Landing Novel Spotlight -->
+    <BookSpotlight client:visible />
+
+    <!-- 6. A Life of Creativity, Faith, and Purpose Section -->
+    <LifeOfCreativity client:visible />
+
+    <!-- 7. Interactive Book Reviews Carousel -->
+    <BookReviewsCarousel client:visible />
+
+
+    <!-- 9. Fully Responsive Footer Component (Crimson Red #B21816) -->
+    <Footer client:load />
+  </body>
+</html>
