@@ -1,0 +1,42 @@
+---
+import "@/styles/globals.css";
+import Header from "@/components/Header";
+import MediaBanner from "@/components/MediaBanner";
+import MediaKitContent from "@/components/MediaKitContent";
+import BookReviewsCarousel from "@/components/BookReviewsCarousel";
+import PageBottomContact from "@/components/PageBottomContact";
+import Footer from "@/components/Footer";
+---
+
+<html lang="en" class="scroll-smooth">
+  <head>
+    <meta charset="utf-8" />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Media Kit — Philip Tate Official Website</title>
+    <meta
+      name="description"
+      content="Official media kit, cinematic book trailers, video interviews, author background, and press resources for author and minister Philip Tate."
+    />
+  </head>
+  <body class="min-h-screen bg-[#FCFAF7] text-[#2A2421] font-sans antialiased selection:bg-[#B21816] selection:text-white">
+    <!-- 1. Header Navigation -->
+    <Header client:load />
+
+    <!-- 2. Scenic Media Kit Banner -->
+    <MediaBanner client:load />
+
+    <!-- 3. Media Kit Content: Quotes, Video Showcase, Novel & Article Spotlights, Archive -->
+    <MediaKitContent client:load />
+
+    <!-- 4. Critical Praise & Reader Reflections -->
+    <BookReviewsCarousel client:visible />
+
+    <!-- 5. Pre-Footer Contact Form -->
+    <PageBottomContact client:visible />
+
+    <!-- 6. Signature Crimson Red Footer -->
+    <Footer client:load />
+  </body>
+</html>
+

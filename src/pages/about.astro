@@ -1,0 +1,42 @@
+---
+import "@/styles/globals.css";
+import Header from "@/components/Header";
+import AboutBanner from "@/components/AboutBanner";
+import AboutContent from "@/components/AboutContent";
+import BookReviewsCarousel from "@/components/BookReviewsCarousel";
+import PageBottomContact from "@/components/PageBottomContact";
+import Footer from "@/components/Footer";
+---
+
+<html lang="en" class="scroll-smooth">
+  <head>
+    <meta charset="utf-8" />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>About the Author — Philip Tate Official Website</title>
+    <meta
+      name="description"
+      content="Read the biography of author and Methodist minister Philip Tate. Discover his Blue Ridge mountain roots in Marion NC, EMS paramedic service, and his bestselling thrillers."
+    />
+  </head>
+  <body class="min-h-screen bg-[#FCFAF7] text-[#2A2421] font-sans antialiased selection:bg-[#B21816] selection:text-white">
+    <!-- 1. Header Navigation -->
+    <Header client:load />
+
+    <!-- 2. Scenic Banner with Floating Glass "About the Author" Box -->
+    <AboutBanner client:load />
+
+    <!-- 3. Editorial 2-Column Biography and Author Photo -->
+    <AboutContent client:load />
+
+    <!-- 4. Critical Praise & Reader Reflections -->
+    <BookReviewsCarousel client:visible />
+
+    <!-- 5. Connect with Author Contact Form -->
+    <PageBottomContact client:visible />
+
+    <!-- 6. Signature Crimson Red Footer -->
+    <Footer client:load />
+  </body>
+</html>
+

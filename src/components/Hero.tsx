@@ -1,6 +1,7 @@
 import React from "react";
 import { Button } from "@/components/ui/button";
 import { Star, Award } from "lucide-react";
+import { motion } from "framer-motion";
 
 interface HeroProps {
   title?: string;
@@ -37,7 +38,12 @@ export default function Hero({
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 w-full">
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-8 items-center">
           {/* Left Column: Hero Content */}
-          <div className="lg:col-span-7 flex flex-col items-start text-left z-10">
+          <motion.div
+            initial={{ opacity: 0, y: 28 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.8, ease: [0.22, 1, 0.36, 1] }}
+            className="lg:col-span-7 flex flex-col items-start text-left z-10"
+          >
             {/* Main Title */}
             <h1 className="font-serif-title text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-bold tracking-tight text-[#2A2421] leading-[1.08] mb-4">
               {title}
@@ -58,21 +64,33 @@ export default function Hero({
 
             {/* Dual CTA Buttons (Clean without icons) */}
             <div className="flex flex-wrap items-center gap-4 w-full sm:w-auto mb-8">
-              <Button
-                variant="default"
-                size="lg"
-                className="bg-[#B21816] hover:bg-[#991412] text-white shadow-md hover:shadow-lg cursor-pointer text-xs uppercase tracking-widest font-semibold px-8 h-12 rounded-full transition-all active:scale-95"
+              <a
+                href="https://www.amazon.com/s?k=Thwarted+Enemy+Philip+Tate"
+                target="_blank"
+                rel="noopener noreferrer"
               >
-                Buy Now
-              </Button>
+                <Button
+                  variant="default"
+                  size="lg"
+                  className="bg-[#B21816] hover:bg-[#991412] text-white shadow-md hover:shadow-lg cursor-pointer text-xs uppercase tracking-widest font-semibold px-8 h-12 rounded-[10px] transition-all active:scale-95"
+                >
+                  Buy Now
+                </Button>
+              </a>
 
-              <Button
-                variant="outline"
-                size="lg"
-                className="border-2 border-[#B21816] text-[#B21816] hover:bg-[#B21816]/10 bg-[#FCFAF7]/70 backdrop-blur-sm shadow-xs cursor-pointer text-xs uppercase tracking-widest font-semibold px-8 h-12 rounded-full transition-all active:scale-95"
+              <a
+                href="https://mcdowellnews.com/life-entertainment/local/events/article_c04fca73-27b9-4968-8a88-211559940265.html"
+                target="_blank"
+                rel="noopener noreferrer"
               >
-                Get a Copy
-              </Button>
+                <Button
+                  variant="outline"
+                  size="lg"
+                  className="border-2 border-[#B21816] text-[#B21816] hover:bg-[#B21816]/10 bg-[#FCFAF7]/70 backdrop-blur-sm shadow-xs cursor-pointer text-xs uppercase tracking-widest font-semibold px-8 h-12 rounded-[10px] transition-all active:scale-95"
+                >
+                  Press Release
+                </Button>
+              </a>
             </div>
 
             {/* Social proof & Rating highlights */}
@@ -94,17 +112,26 @@ export default function Hero({
                 <span className="font-medium">#1 Literary Release</span>
               </div>
             </div>
-          </div>
+          </motion.div>
 
           {/* Right Column: 3D Book Presentation & Artistic Still */}
-          <div className="lg:col-span-5 flex justify-center lg:justify-end relative">
+          <motion.div
+            initial={{ opacity: 0, scale: 0.94, y: 28 }}
+            animate={{ opacity: 1, scale: 1, y: 0 }}
+            transition={{ duration: 0.9, delay: 0.15, ease: [0.22, 1, 0.36, 1] }}
+            className="lg:col-span-5 flex justify-center lg:justify-end relative"
+          >
             <div className="relative w-full max-w-sm sm:max-w-md">
               {/* Soft decorative glow */}
               <div className="absolute -inset-4 bg-gradient-to-tr from-[#B21816]/20 via-[#EBF0EC]/40 to-[#F3ECE4]/60 rounded-3xl blur-2xl -z-10"></div>
 
               {/* Book showcase card */}
               <div className="relative rounded-2xl p-6 sm:p-7 bg-[#FCFAF7]/90 backdrop-blur-md border border-[#E8DFD8] shadow-xl hover:shadow-2xl transition-all duration-300">
-                <div className="relative aspect-[3/4] w-full rounded-xl overflow-hidden shadow-2xl ring-1 ring-black/10 group">
+                <a
+                  href="/books/thwarted-enemy"
+                  className="relative aspect-[3/4] w-full rounded-xl overflow-hidden shadow-2xl ring-1 ring-black/10 group block cursor-pointer"
+                  title="View Thwarted Enemy Details"
+                >
                   <img
                     src={bookCoverUrl}
                     alt="Book Cover Mockup"
@@ -112,20 +139,41 @@ export default function Hero({
                   />
                   {/* Subtle spine glare overlay */}
                   <div className="absolute inset-y-0 left-0 w-8 bg-gradient-to-r from-white/30 via-white/10 to-transparent pointer-events-none"></div>
-                </div>
+                </a>
 
                 {/* Bottom mini-banner on the card */}
                 <div className="mt-4 pt-4 border-t border-[#E8DFD8] flex items-center justify-between text-xs text-[#786C65]">
                   <span>Available on:</span>
                   <div className="flex items-center gap-2 font-semibold text-[#2A2421]">
-                    <span className="px-2 py-0.5 rounded-sm bg-[#F3ECE4] text-[11px]">Amazon</span>
-                    <span className="px-2 py-0.5 rounded-sm bg-[#F3ECE4] text-[11px]">Audible</span>
-                    <span className="px-2 py-0.5 rounded-sm bg-[#F3ECE4] text-[11px]">Barnes & Noble</span>
+                    <a
+                      href="https://www.amazon.com/s?k=Thwarted+Enemy+Philip+Tate"
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="px-2 py-0.5 rounded-sm bg-[#F3ECE4] hover:bg-[#B21816] hover:text-white transition-colors text-[11px]"
+                    >
+                      Amazon
+                    </a>
+                    <a
+                      href="https://www.audible.com/search?keywords=Philip+Tate"
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="px-2 py-0.5 rounded-sm bg-[#F3ECE4] hover:bg-[#B21816] hover:text-white transition-colors text-[11px]"
+                    >
+                      Audible
+                    </a>
+                    <a
+                      href="https://www.barnesandnoble.com/s/Philip%20Tate"
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="px-2 py-0.5 rounded-sm bg-[#F3ECE4] hover:bg-[#B21816] hover:text-white transition-colors text-[11px]"
+                    >
+                      Barnes & Noble
+                    </a>
                   </div>
                 </div>
               </div>
             </div>
-          </div>
+          </motion.div>
         </div>
       </div>
     </section>

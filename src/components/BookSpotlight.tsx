@@ -1,5 +1,6 @@
 import React from "react";
 import { Button } from "@/components/ui/button";
+import { motion } from "framer-motion";
 
 export default function BookSpotlight() {
   return (
@@ -20,7 +21,13 @@ export default function BookSpotlight() {
       <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-14 items-center">
           {/* Left Column: Literary Hook Copy & Button */}
-          <div className="lg:col-span-7 space-y-6 text-left">
+          <motion.div
+            initial={{ opacity: 0, x: -30 }}
+            whileInView={{ opacity: 1, x: 0 }}
+            viewport={{ once: true, margin: "-60px" }}
+            transition={{ duration: 0.8, ease: [0.22, 1, 0.36, 1] }}
+            className="lg:col-span-7 space-y-6 text-left"
+          >
             {/* <div className="inline-block px-3 py-1 rounded-full bg-amber-500/20 border border-amber-400/30 text-amber-300 text-[11px] uppercase tracking-widest font-semibold">
               Featured Novel of Suspense & Redemption
             </div> */}
@@ -46,31 +53,43 @@ export default function BookSpotlight() {
 
             {/* CTA Button in #B21816 (Clean without icons) */}
             <div className="pt-2">
-              <Button
-                variant="default"
-                className="bg-[#B21816] hover:bg-[#991412] text-white rounded-lg px-8 h-11 text-xs uppercase tracking-widest font-semibold shadow-lg cursor-pointer active:scale-95 transition-all"
-              >
-                LEARN MORE
-              </Button>
+              <a href="/books/rizzoes-landing">
+                <Button
+                  variant="default"
+                  className="bg-[#B21816] hover:bg-[#991412] text-white rounded-[10px] px-8 h-11 text-xs uppercase tracking-widest font-semibold shadow-lg cursor-pointer active:scale-95 transition-all"
+                >
+                  LEARN MORE
+                </Button>
+              </a>
             </div>
-          </div>
+          </motion.div>
 
           {/* Right Column: Featured Real Book Cover Presentation */}
-          <div className="lg:col-span-5 flex justify-center lg:justify-end">
+          <motion.div
+            initial={{ opacity: 0, scale: 0.94, y: 28 }}
+            whileInView={{ opacity: 1, scale: 1, y: 0 }}
+            viewport={{ once: true, margin: "-60px" }}
+            transition={{ duration: 0.8, delay: 0.15, ease: [0.22, 1, 0.36, 1] }}
+            className="lg:col-span-5 flex justify-center lg:justify-end"
+          >
             <div className="relative w-full max-w-xs sm:max-w-sm group">
               {/* Soft ambient backlight glow */}
               <div className="absolute -inset-4 bg-amber-500/10 rounded-3xl blur-2xl -z-10 group-hover:bg-amber-500/20 transition-all"></div>
 
               {/* Tilted 3D Book Mockup with Real Book Cover */}
-              <div className="relative aspect-[2/3] rounded-2xl overflow-hidden shadow-2xl border border-white/20 ring-1 ring-black/40 transform rotate-2 group-hover:rotate-0 transition-transform duration-500">
+              <a
+                href="/books/rizzoes-landing"
+                className="block relative aspect-[2/3] rounded-2xl overflow-hidden shadow-2xl border border-white/20 ring-1 ring-black/40 transform rotate-2 group-hover:rotate-0 transition-transform duration-500 cursor-pointer"
+                title="View Rizzoe's Landing Details"
+              >
                 <img
                   src="/book-rizzoes-landing-front.jpg"
                   alt="Rizzoe's Landing Real Book Cover"
                   className="w-full h-full object-cover"
                 />
-              </div>
+              </a>
             </div>
-          </div>
+          </motion.div>
         </div>
       </div>
     </section>

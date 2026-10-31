@@ -85,3 +85,45 @@
 .font-signature {
   font-family: 'Great Vibes', cursive;
 }
+
+/* Bi-Directional Vertical Marquee Animations */
+@keyframes marquee-vertical-up {
+  0% {
+    transform: translateY(0%);
+  }
+  100% {
+    transform: translateY(-50%);
+  }
+}
+
+@keyframes marquee-vertical-down {
+  0% {
+    transform: translateY(-50%);
+  }
+  100% {
+    transform: translateY(0%);
+  }
+}
+
+.animate-marquee-up {
+  animation: marquee-vertical-up 36s linear infinite;
+}
+
+.animate-marquee-down {
+  animation: marquee-vertical-down 36s linear infinite;
+}
+
+.animate-marquee-up-alt {
+  animation: marquee-vertical-up 42s linear infinite;
+}
+
+.animate-marquee-down-alt {
+  animation: marquee-vertical-down 42s linear infinite;
+}
+
+.marquee-pause:hover .animate-marquee-up,
+.marquee-pause:hover .animate-marquee-down,
+.marquee-pause:hover .animate-marquee-up-alt,
+.marquee-pause:hover .animate-marquee-down-alt {
+  animation-play-state: paused;
+}

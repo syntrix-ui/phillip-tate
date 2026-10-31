@@ -1,7 +1,9 @@
 import React, { useState } from "react";
 import { Star, ChevronLeft, ChevronRight } from "lucide-react";
+import { motion } from "framer-motion";
+import type { BookReview } from "@/data/books";
 
-interface Review {
+export interface Review {
   id: number;
   title: string;
   rating: number;
@@ -10,7 +12,7 @@ interface Review {
   source: string;
 }
 
-const reviews: Review[] = [
+const defaultReviews: Review[] = [
   {
     id: 1,
     title: "THWARTED ENEMY: PULSE-POUNDING SUSPENSE",
@@ -58,43 +60,73 @@ const reviews: Review[] = [
   },
 ];
 
-export default function BookReviewsCarousel() {
+interface BookReviewsCarouselProps {
+  reviews?: BookReview[] | Review[];
+  sectionTitle?: string;
+  sectionSubtitle?: string;
+  sectionId?: string;
+}
+
+export default function BookReviewsCarousel({
+  reviews = defaultReviews,
+  sectionTitle = "BOOK REVIEWS",
+  sectionSubtitle = "Reader Reflections",
+  sectionId = "reviews",
+}: BookReviewsCarouselProps) {
   const [currentIndex, setCurrentIndex] = useState(0);
-  const maxIndex = reviews.length - 1;
+  const activeReviews = reviews && reviews.length > 0 ? reviews : defaultReviews;
+  const total = activeReviews.length;
 
   const nextSlide = () => {
-    setCurrentIndex((prev) => (prev >= maxIndex - 2 ? 0 : prev + 1));
+    setCurrentIndex((prev) => (prev + 1) % total);
   };
 
   const prevSlide = () => {
-    setCurrentIndex((prev) => (prev <= 0 ? maxIndex - 2 : prev - 1));
+    setCurrentIndex((prev) => (prev - 1 + total) % total);
   };
 
+  // Generate 3 displayed reviews wrapped cyclically
+  const displayedReviews = total <= 3
+    ? activeReviews
+    : [
+        activeReviews[currentIndex % total],
+        activeReviews[(currentIndex + 1) % total],
+        activeReviews[(currentIndex + 2) % total],
+      ];
+
   return (
-    <section id="reviews" className="bg-[#FAF7F3] text-[#2A2421] py-20 md:py-28 relative overflow-hidden">
+    <section id={sectionId} className="bg-[#FAF7F3] text-[#2A2421] py-20 md:py-28 relative overflow-hidden border-t border-[#E8DFD8]">
       <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
         {/* Section Header */}
-        <div className="text-center max-w-2xl mx-auto mb-12 md:mb-16">
+        <motion.div
+          initial={{ opacity: 0, y: 22 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true, margin: "-60px" }}
+          transition={{ duration: 0.7, ease: [0.22, 1, 0.36, 1] }}
+          className="text-center max-w-2xl mx-auto mb-12 md:mb-16"
+        >
           <span className="text-xs uppercase tracking-widest font-semibold text-[#B21816] block mb-2">
-            Reader Reflections
+            {sectionSubtitle}
           </span>
           <h2 className="font-serif-title text-3xl sm:text-4xl md:text-5xl font-bold tracking-tight text-[#2A2421] uppercase">
-            BOOK REVIEWS
+            {sectionTitle}
           </h2>
           <div className="w-16 h-[2px] bg-[#B21816] mx-auto mt-3"></div>
-        </div>
+        </motion.div>
 
         {/* Carousel Container */}
-        <div className="relative">
+        <motion.div
+          initial={{ opacity: 0, y: 30 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true, margin: "-60px" }}
+          transition={{ duration: 0.8, delay: 0.15, ease: [0.22, 1, 0.36, 1] }}
+          className="relative"
+        >
           {/* Review Cards Grid */}
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 transition-all duration-500 ease-out">
-            {reviews.slice(currentIndex, currentIndex + 3).concat(
-              currentIndex + 3 > reviews.length
-                ? reviews.slice(0, (currentIndex + 3) % reviews.length)
-                : []
-            ).map((review) => (
+            {displayedReviews.map((review, index) => (
               <div
-                key={review.id}
+                key={`${review.id}-${index}`}
                 className="bg-white border border-[#E8DFD8] rounded-2xl p-6 sm:p-7 shadow-xs hover:shadow-lg hover:border-[#B21816]/40 transition-all duration-300 flex flex-col justify-between space-y-4 text-left group"
               >
                 <div className="space-y-3">
@@ -104,8 +136,8 @@ export default function BookReviewsCarousel() {
                   </h3>
 
                   {/* 5 Amber/Gold Stars */}
-                  <div className="flex items-center gap-1">
-                    {[...Array(review.rating)].map((_, i) => (
+                  <div className="flex items-center gap-1 select-none">
+                    {[...Array(review.rating || 5)].map((_, i) => (
                       <Star
                         key={i}
                         className="w-4 h-4 fill-amber-400 text-amber-400"
@@ -128,41 +160,43 @@ export default function BookReviewsCarousel() {
             ))}
           </div>
 
-          {/* Carousel Arrow Controls */}
-          <div className="flex items-center justify-center gap-4 mt-10">
-            <button
-              onClick={prevSlide}
-              className="w-10 h-10 rounded-full bg-white border border-[#E8DFD8] hover:bg-[#B21816] hover:text-white hover:border-[#B21816] text-[#2A2421] flex items-center justify-center shadow-xs cursor-pointer transition-all active:scale-95"
-              aria-label="Previous Reviews"
-            >
-              <ChevronLeft className="w-5 h-5" />
-            </button>
+          {/* Carousel Arrow Controls (if more than 3 reviews) */}
+          {total > 3 && (
+            <div className="flex items-center justify-center gap-4 mt-10">
+              <button
+                onClick={prevSlide}
+                className="w-10 h-10 rounded-[10px] bg-white border border-[#E8DFD8] hover:bg-[#B21816] hover:text-white hover:border-[#B21816] text-[#2A2421] flex items-center justify-center shadow-xs cursor-pointer transition-all active:scale-95"
+                aria-label="Previous Reviews"
+              >
+                <ChevronLeft className="w-5 h-5" />
+              </button>
 
-            {/* Pagination Dots (Matching Theme #B21816) */}
-            <div className="flex items-center gap-2">
-              {[0, 1, 2].map((idx) => (
-                <button
-                  key={idx}
-                  onClick={() => setCurrentIndex(idx)}
-                  className={`rounded-full transition-all duration-300 cursor-pointer ${
-                    currentIndex === idx
-                      ? "w-4 h-2.5 bg-[#B21816]"
-                      : "w-2.5 h-2.5 bg-[#E8DFD8] hover:bg-[#B21816]/50"
-                  }`}
-                  aria-label={`Go to slide ${idx + 1}`}
-                />
-              ))}
+              {/* Pagination Dots (Matching Theme #B21816) */}
+              <div className="flex items-center gap-2">
+                {activeReviews.map((_, idx) => (
+                  <button
+                    key={idx}
+                    onClick={() => setCurrentIndex(idx)}
+                    className={`rounded-full transition-all duration-300 cursor-pointer ${
+                      currentIndex === idx
+                        ? "w-4 h-2.5 bg-[#B21816]"
+                        : "w-2.5 h-2.5 bg-[#E8DFD8] hover:bg-[#B21816]/50"
+                    }`}
+                    aria-label={`Go to slide ${idx + 1}`}
+                  />
+                ))}
+              </div>
+
+              <button
+                onClick={nextSlide}
+                className="w-10 h-10 rounded-[10px] bg-white border border-[#E8DFD8] hover:bg-[#B21816] hover:text-white hover:border-[#B21816] text-[#2A2421] flex items-center justify-center shadow-xs cursor-pointer transition-all active:scale-95"
+                aria-label="Next Reviews"
+              >
+                <ChevronRight className="w-5 h-5" />
+              </button>
             </div>
-
-            <button
-              onClick={nextSlide}
-              className="w-10 h-10 rounded-full bg-white border border-[#E8DFD8] hover:bg-[#B21816] hover:text-white hover:border-[#B21816] text-[#2A2421] flex items-center justify-center shadow-xs cursor-pointer transition-all active:scale-95"
-              aria-label="Next Reviews"
-            >
-              <ChevronRight className="w-5 h-5" />
-            </button>
-          </div>
-        </div>
+          )}
+        </motion.div>
       </div>
     </section>
   );

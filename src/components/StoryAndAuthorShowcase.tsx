@@ -1,8 +1,10 @@
-import React from "react";
+import React, { useState } from "react";
 import { Button } from "@/components/ui/button";
-import { Play } from "lucide-react";
+import { Play, X } from "lucide-react";
+import { motion } from "framer-motion";
 
 export default function StoryAndAuthorShowcase() {
+  const [isPlaying, setIsPlaying] = useState(false);
   return (
     <div className="bg-[#F5EFEB] text-[#2A2421] pt-20 md:pt-28 pb-0 relative">
       {/* Subtle background ambient grain / texture */}
@@ -14,30 +16,50 @@ export default function StoryAndAuthorShowcase() {
             ======================================================== */}
         <section className="grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-14 items-center">
           {/* Left: Real Books by Philip Tate (Dual Book Presentation) */}
-          <div className="lg:col-span-5 flex justify-center">
+          <motion.div
+            initial={{ opacity: 0, x: -30 }}
+            whileInView={{ opacity: 1, x: 0 }}
+            viewport={{ once: true, margin: "-60px" }}
+            transition={{ duration: 0.8, ease: [0.22, 1, 0.36, 1] }}
+            className="lg:col-span-5 flex justify-center"
+          >
             <div className="relative w-full max-w-sm sm:max-w-md h-[360px] sm:h-[420px] flex items-center justify-center">
               {/* Book 1: Thwarted Enemy */}
-              <div className="absolute left-2 sm:left-4 top-6 w-44 sm:w-52 aspect-[2/3] rounded-xl overflow-hidden shadow-2xl border border-white/60 -rotate-6 hover:rotate-0 hover:z-20 transition-all duration-300 ring-1 ring-black/10">
+              <a
+                href="/books/thwarted-enemy"
+                className="absolute left-2 sm:left-4 top-6 w-44 sm:w-52 aspect-[2/3] rounded-xl overflow-hidden shadow-2xl border border-white/60 -rotate-6 hover:rotate-0 hover:z-20 transition-all duration-300 ring-1 ring-black/10 group cursor-pointer block"
+                title="View Thwarted Enemy"
+              >
                 <img
                   src="/book-thwarted-enemy-front.jpg"
                   alt="Thwarted Enemy by Philip Tate"
-                  className="w-full h-full object-cover"
+                  className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
                 />
-              </div>
+              </a>
 
               {/* Book 2: Rizzoe's Landing */}
-              <div className="absolute right-2 sm:right-4 top-2 w-44 sm:w-52 aspect-[2/3] rounded-xl overflow-hidden shadow-2xl border border-white/60 rotate-6 hover:rotate-0 hover:z-20 transition-all duration-300 ring-1 ring-black/10">
+              <a
+                href="/books/rizzoes-landing"
+                className="absolute right-2 sm:right-4 top-2 w-44 sm:w-52 aspect-[2/3] rounded-xl overflow-hidden shadow-2xl border border-white/60 rotate-6 hover:rotate-0 hover:z-20 transition-all duration-300 ring-1 ring-black/10 group cursor-pointer block"
+                title="View Rizzoe's Landing"
+              >
                 <img
                   src="/book-rizzoes-landing-front.jpg"
                   alt="Rizzoe's Landing by Philip J. Tate"
-                  className="w-full h-full object-cover"
+                  className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
                 />
-              </div>
+              </a>
             </div>
-          </div>
+          </motion.div>
 
           {/* Right: Literary Welcome Copy */}
-          <div className="lg:col-span-7 space-y-4 text-center lg:text-left">
+          <motion.div
+            initial={{ opacity: 0, x: 30 }}
+            whileInView={{ opacity: 1, x: 0 }}
+            viewport={{ once: true, margin: "-60px" }}
+            transition={{ duration: 0.8, delay: 0.1, ease: [0.22, 1, 0.36, 1] }}
+            className="lg:col-span-7 space-y-4 text-center lg:text-left"
+          >
             <h2 className="font-serif-title text-3xl sm:text-4xl md:text-5xl font-bold tracking-tight text-[#2A2421]">
               WELCOME
             </h2>
@@ -59,7 +81,7 @@ export default function StoryAndAuthorShowcase() {
                 Welcome to my literary journey.
               </p>
             </div>
-          </div>
+          </motion.div>
         </section>
 
         {/* ========================================================
@@ -67,15 +89,27 @@ export default function StoryAndAuthorShowcase() {
             ======================================================== */}
         <section className="space-y-6">
           {/* Centered Section Title */}
-          <div className="text-center">
+          <motion.div
+            initial={{ opacity: 0, y: 22 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true, margin: "-60px" }}
+            transition={{ duration: 0.7, ease: [0.22, 1, 0.36, 1] }}
+            className="text-center"
+          >
             <h2 className="font-serif-title text-3xl sm:text-4xl md:text-5xl font-bold tracking-widest text-[#2A2421] uppercase">
               FROM THE AUTHOR
             </h2>
             <div className="w-16 h-[2px] bg-[#B21816] mx-auto mt-3"></div>
-          </div>
+          </motion.div>
 
           {/* Horizontal Author Feature Card */}
-          <div className="relative rounded-2xl md:rounded-3xl overflow-hidden shadow-xl border border-[#E8DFD8] bg-[#FAF8F5]">
+          <motion.div
+            initial={{ opacity: 0, y: 32 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true, margin: "-60px" }}
+            transition={{ duration: 0.8, delay: 0.1, ease: [0.22, 1, 0.36, 1] }}
+            className="relative rounded-2xl md:rounded-3xl overflow-hidden shadow-xl border border-[#E8DFD8] bg-[#FAF8F5]"
+          >
             <div className="grid grid-cols-1 md:grid-cols-12 items-stretch">
               {/* Left Column: Real Author Photo */}
               <div className="md:col-span-5 relative min-h-[320px] md:min-h-full">
@@ -109,45 +143,83 @@ export default function StoryAndAuthorShowcase() {
 
                 {/* Card Button in #B21816 */}
                 <div className="pt-2">
-                  <Button
-                    variant="default"
-                    className="bg-[#B21816] hover:bg-[#991412] text-white rounded-lg px-7 h-10 text-xs uppercase tracking-widest font-semibold cursor-pointer shadow-xs active:scale-95 transition-all"
-                  >
-                    LEARN MORE
-                  </Button>
+                  <a href="/about">
+                    <Button
+                      variant="default"
+                      className="bg-[#B21816] hover:bg-[#991412] text-white rounded-[10px] px-7 h-10 text-xs uppercase tracking-widest font-semibold cursor-pointer shadow-xs active:scale-95 transition-all"
+                    >
+                      LEARN MORE
+                    </Button>
+                  </a>
                 </div>
               </div>
             </div>
-          </div>
+          </motion.div>
         </section>
 
         {/* ========================================================
-            PART 3: OVERLAPPING TRAILER IMAGE CARD
+            PART 3: OVERLAPPING INTRO VIDEO CARD
             Sitting directly on the border between upper & lower section!
             ======================================================== */}
-        <div className="relative -mb-32 sm:-mb-40 md:-mb-48 z-20 flex justify-center pt-4">
+        <motion.div
+          initial={{ opacity: 0, y: 36 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true, margin: "-60px" }}
+          transition={{ duration: 0.85, ease: [0.22, 1, 0.36, 1] }}
+          className="relative -mb-32 sm:-mb-40 md:-mb-48 z-20 flex justify-center pt-4"
+        >
           <div className="relative w-full max-w-3xl aspect-[16/10] sm:aspect-video rounded-2xl md:rounded-3xl overflow-hidden shadow-2xl border-4 border-white ring-1 ring-black/10 group bg-black">
-            {/* Hamptons Chateau / Mansion Visual */}
-            <img
-              src="https://images.unsplash.com/photo-1512917774080-9991f1c4c750?auto=format&fit=crop&q=85&w=1600"
-              alt="Hamptons Chateau Preview"
-              className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700"
-            />
-
-            {/* Dark aesthetic backdrop overlay */}
-            <div className="absolute inset-0 bg-black/40 group-hover:bg-black/50 transition-colors"></div>
-
-            {/* Center Red Circular Play Icon */}
-            <div className="absolute inset-0 flex items-center justify-center">
-              <div className="relative flex items-center justify-center">
-                <span className="absolute w-20 h-20 sm:w-24 sm:h-24 rounded-full bg-[#B21816]/30 animate-ping"></span>
-                <div className="relative w-16 h-16 sm:w-20 sm:h-20 rounded-full bg-[#B21816] text-white flex items-center justify-center shadow-2xl ring-4 ring-white/30 group-hover:scale-110 transition-transform duration-300">
-                  <Play className="w-7 h-7 sm:w-8 sm:h-8 fill-white ml-1" />
-                </div>
+            {isPlaying ? (
+              <div className="relative w-full h-full bg-black flex items-center justify-center">
+                <video
+                  src="/videos/Philip Tate Bio Video.mp4"
+                  controls
+                  autoPlay
+                  playsInline
+                  className="w-full h-full object-contain bg-black"
+                />
+                <button
+                  type="button"
+                  onClick={() => setIsPlaying(false)}
+                  className="absolute top-3 right-3 z-30 w-9 h-9 rounded-full bg-black/80 hover:bg-[#B21816] text-white flex items-center justify-center cursor-pointer transition-colors shadow-lg"
+                  aria-label="Close Video"
+                >
+                  <X className="w-5 h-5" />
+                </button>
               </div>
-            </div>
+            ) : (
+              <button
+                type="button"
+                onClick={() => setIsPlaying(true)}
+                className="w-full h-full block text-left cursor-pointer relative"
+                aria-label="Watch Author Introduction Video"
+              >
+                {/* Author Video Poster Still */}
+                <img
+                  src="/author_bio_poster.jpg"
+                  alt="Philip Tate Author Introduction & Biography"
+                  className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700"
+                />
+
+                {/* Dark aesthetic backdrop overlay */}
+                <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/25 to-transparent group-hover:bg-black/40 transition-colors"></div>
+
+                {/* Center Red Circular Play Icon */}
+                <div className="absolute inset-0 flex flex-col items-center justify-center">
+                  <div className="relative flex items-center justify-center">
+                    <span className="absolute w-20 h-20 sm:w-24 sm:h-24 rounded-full bg-[#B21816]/30 animate-ping"></span>
+                    <div className="relative w-16 h-16 sm:w-20 sm:h-20 rounded-full bg-[#B21816] text-white flex items-center justify-center shadow-2xl ring-4 ring-white/30 group-hover:scale-110 transition-transform duration-300">
+                      <Play className="w-7 h-7 sm:w-8 sm:h-8 fill-white ml-1" />
+                    </div>
+                  </div>
+                  <span className="text-white text-xs sm:text-sm uppercase tracking-widest font-semibold mt-4 drop-shadow-md bg-black/40 px-4 py-1.5 rounded-full border border-white/20">
+                    Watch Author Introduction Video
+                  </span>
+                </div>
+              </button>
+            )}
           </div>
-        </div>
+        </motion.div>
       </div>
     </div>
   );

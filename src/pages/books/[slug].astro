@@ -1,0 +1,65 @@
+---
+import "@/styles/globals.css";
+import Header from "@/components/Header";
+import BookDetailBanner from "@/components/BookDetailBanner";
+import BookDetailContent from "@/components/BookDetailContent";
+import PageBottomContact from "@/components/PageBottomContact";
+import Footer from "@/components/Footer";
+import { booksData, type Book } from "@/data/books";
+
+export async function getStaticPaths() {
+  return booksData.map((book) => {
+    const otherBooks = booksData.filter((b) => b.slug !== book.slug);
+    return {
+      params: { slug: book.slug },
+      props: { book, otherBooks },
+    };
+  });
+}
+
+interface Props {
+  book: Book;
+  otherBooks: Book[];
+}
+
+const { book, otherBooks } = Astro.props;
+---
+
+<html lang="en" class="scroll-smooth">
+  <head>
+    <meta charset="utf-8" />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>{book.title} — Philip Tate Official Website</title>
+    <meta name="description" content={book.metaDescription} />
+    <meta property="og:title" content={`${book.title} by Philip Tate`} />
+    <meta property="og:description" content={book.metaDescription} />
+    <meta property="og:image" content={book.coverImage} />
+  </head>
+  <body class="min-h-screen bg-[#FCFAF7] text-[#2A2421] font-sans antialiased selection:bg-[#B21816] selection:text-white">
+    <!-- 1. Header with interactive Books Dropdown -->
+    <Header client:load />
+
+    <!-- 2. Scenic Banner with Floating Frosted Glass "ABOUT THE BOOK" Badge (No Breadcrumbs) -->
+    <BookDetailBanner
+      title={book.title}
+      subtitle={book.subtitle}
+      scenicBg={book.bannerBg || book.scenicImage}
+      client:load
+    />
+
+    <!-- 3. Two-Column Editorial Layout (Hook & 3D Cover, Scenic Narrative, Reader Review, and More Books) -->
+    <BookDetailContent
+      book={book}
+      otherBooks={otherBooks}
+      client:load
+    />
+
+    <!-- 4. Quick Contact Form Section (Bottom of Page) -->
+    <PageBottomContact client:visible />
+
+    <!-- 5. Signature Crimson Red Footer (#B21816) -->
+    <Footer client:load />
+  </body>
+</html>
+

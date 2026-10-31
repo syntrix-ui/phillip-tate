@@ -1,5 +1,6 @@
 import React from "react";
 import { Button } from "@/components/ui/button";
+import { motion } from "framer-motion";
 
 export default function AboutTheAuthor() {
   return (
@@ -7,7 +8,13 @@ export default function AboutTheAuthor() {
       <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-14 items-center">
           {/* Left Column: Blue Ridge / Scenic Foothills Atmosphere */}
-          <div className="lg:col-span-6 flex justify-center">
+          <motion.div
+            initial={{ opacity: 0, x: -30 }}
+            whileInView={{ opacity: 1, x: 0 }}
+            viewport={{ once: true, margin: "-60px" }}
+            transition={{ duration: 0.8, ease: [0.22, 1, 0.36, 1] }}
+            className="lg:col-span-6 flex justify-center"
+          >
             <div className="relative w-full max-w-lg lg:max-w-xl aspect-[16/11] rounded-2xl md:rounded-3xl overflow-hidden shadow-2xl border border-[#E8DFD8] group">
               <img
                 src="https://images.unsplash.com/photo-1506744038136-46273834b3fb?auto=format&fit=crop&q=80&w=1200"
@@ -16,10 +23,16 @@ export default function AboutTheAuthor() {
               />
               <div className="absolute inset-0 bg-gradient-to-t from-black/30 via-transparent to-transparent pointer-events-none"></div>
             </div>
-          </div>
+          </motion.div>
 
           {/* Right Column: In-depth Philip Tate Biography */}
-          <div className="lg:col-span-6 space-y-5 text-center lg:text-left">
+          <motion.div
+            initial={{ opacity: 0, x: 30 }}
+            whileInView={{ opacity: 1, x: 0 }}
+            viewport={{ once: true, margin: "-60px" }}
+            transition={{ duration: 0.8, delay: 0.1, ease: [0.22, 1, 0.36, 1] }}
+            className="lg:col-span-6 space-y-5 text-center lg:text-left"
+          >
             <h2 className="font-serif-title text-3xl sm:text-4xl md:text-5xl font-bold tracking-tight text-[#2A2421]">
               ABOUT THE AUTHOR
             </h2>
@@ -44,14 +57,16 @@ export default function AboutTheAuthor() {
 
             {/* CTA Button in #B21816 (Clean without icons) */}
             <div className="pt-2 flex justify-center lg:justify-start">
-              <Button
-                variant="default"
-                className="bg-[#B21816] hover:bg-[#991412] text-white rounded-lg px-8 h-11 text-xs uppercase tracking-widest font-semibold cursor-pointer shadow-md active:scale-95 transition-all"
-              >
-                LEARN MORE
-              </Button>
+              <a href="/about">
+                <Button
+                  variant="default"
+                  className="bg-[#B21816] hover:bg-[#991412] text-white rounded-[10px] px-8 h-11 text-xs uppercase tracking-widest font-semibold cursor-pointer shadow-md active:scale-95 transition-all"
+                >
+                  LEARN MORE
+                </Button>
+              </a>
             </div>
-          </div>
+          </motion.div>
         </div>
       </div>
     </section>

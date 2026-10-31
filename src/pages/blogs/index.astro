@@ -1,0 +1,38 @@
+---
+import "@/styles/globals.css";
+import Header from "@/components/Header";
+import BlogsBanner from "@/components/BlogsBanner";
+import BlogsGrid from "@/components/BlogsGrid";
+import PageBottomContact from "@/components/PageBottomContact";
+import Footer from "@/components/Footer";
+import { blogsData } from "@/data/blogs";
+---
+
+<html lang="en" class="scroll-smooth">
+  <head>
+    <meta charset="utf-8" />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Blogs & Articles — Philip Tate Official Website</title>
+    <meta
+      name="description"
+      content="Read essays and articles by Philip Tate on the craft of suspense, Blue Ridge mountain history, frontline emergency service, outdoor angling, and spiritual conviction."
+    />
+  </head>
+  <body class="min-h-screen bg-[#FCFAF7] text-[#2A2421] font-sans antialiased selection:bg-[#B21816] selection:text-white">
+    <!-- 1. Header with Blogs active in Navigation -->
+    <Header client:load />
+
+    <!-- 2. Scenic Banner (Consistent luxury styling, no breadcrumbs) -->
+    <BlogsBanner client:load />
+
+    <!-- 3. 9-Blog Grid Section (Animated with Framer Motion) -->
+    <BlogsGrid blogs={blogsData} client:visible />
+
+    <!-- 4. Contact Form Section (Matching Contact Page Layout) -->
+    <PageBottomContact client:visible />
+
+    <!-- 5. Signature Crimson Red Footer -->
+    <Footer client:load />
+  </body>
+</html>

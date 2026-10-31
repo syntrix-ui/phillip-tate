@@ -1,0 +1,67 @@
+---
+import "@/styles/globals.css";
+import Header from "@/components/Header";
+import BlogDetailBanner from "@/components/BlogDetailBanner";
+import BlogDetailContent from "@/components/BlogDetailContent";
+import PageBottomContact from "@/components/PageBottomContact";
+import Footer from "@/components/Footer";
+import { blogsData, type BlogPost } from "@/data/blogs";
+
+export async function getStaticPaths() {
+  return blogsData.map((blog) => {
+    const relatedBlogs = blogsData.filter((b) => b.slug !== blog.slug).slice(0, 3);
+    return {
+      params: { slug: blog.slug },
+      props: { blog, relatedBlogs },
+    };
+  });
+}
+
+interface Props {
+  blog: BlogPost;
+  relatedBlogs: BlogPost[];
+}
+
+const { blog, relatedBlogs } = Astro.props;
+---
+
+<html lang="en" class="scroll-smooth">
+  <head>
+    <meta charset="utf-8" />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>{blog.title} — Philip Tate Articles</title>
+    <meta name="description" content={blog.excerpt} />
+    <meta property="og:title" content={blog.title} />
+    <meta property="og:description" content={blog.excerpt} />
+    <meta property="og:image" content={blog.coverImage} />
+  </head>
+  <body class="min-h-screen bg-[#FCFAF7] text-[#2A2421] font-sans antialiased selection:bg-[#B21816] selection:text-white">
+    <!-- 1. Header Navigation -->
+    <Header client:load />
+
+    <!-- 2. Scenic Article Banner (Animated with Framer Motion) -->
+    <BlogDetailBanner
+      title={blog.title}
+      category={blog.category}
+      author={blog.author}
+      date={blog.date}
+      readTime={blog.readTime}
+      coverImage={blog.coverImage}
+      client:load
+    />
+
+    <!-- 3. Editorial Article Body and Related Articles (Animated with Framer Motion) -->
+    <BlogDetailContent
+      blog={blog}
+      relatedBlogs={relatedBlogs}
+      client:load
+    />
+
+    <!-- 4. Quick Contact Form Section -->
+    <PageBottomContact client:visible />
+
+    <!-- 5. Signature Crimson Red Footer -->
+    <Footer client:load />
+  </body>
+</html>

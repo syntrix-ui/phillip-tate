@@ -1,0 +1,34 @@
+---
+import "@/styles/globals.css";
+import Header from "@/components/Header";
+import ContactBanner from "@/components/ContactBanner";
+import ContactForm from "@/components/ContactForm";
+import Footer from "@/components/Footer";
+---
+
+<html lang="en" class="scroll-smooth">
+  <head>
+    <meta charset="utf-8" />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Contact — Philip Tate Official Author Website</title>
+    <meta
+      name="description"
+      content="Get in touch with bestselling author and minister Philip Tate for literary inquiries, speaking engagements, and reader correspondence."
+    />
+  </head>
+  <body class="min-h-screen bg-[#FCFAF7] text-[#2A2421] font-sans antialiased selection:bg-[#B21816] selection:text-white">
+    <!-- 1. Responsive Header Navigation -->
+    <Header client:load />
+
+    <!-- 2. Hero Banner (60% Height with Background Image & Overlay) -->
+    <ContactBanner client:load />
+
+    <!-- 3. Contact Form & Author Correspondence Details -->
+    <ContactForm client:load />
+
+    <!-- 4. Footer Component (Crimson Red #B21816) -->
+    <Footer client:load />
+  </body>
+</html>
+
