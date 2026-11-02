@@ -198,8 +198,8 @@ interface SocialFeedProps {
 }
 
 export default function SocialFeed({
-  handle = "@philiptateauthor",
-  profileUrl = "https://mcdowellnews.com/life-entertainment/local/events/article_c04fca73-27b9-4968-8a88-211559940265.html",
+  handle = "@THEPHILIPTATE",
+  profileUrl = "https://www.instagram.com/THEPHILIPTATE/",
 }: SocialFeedProps) {
   return (
     <section className="py-20 md:py-28 bg-[#FAF7F3] border-t border-[#E8DFD8] relative overflow-hidden">
@@ -286,7 +286,7 @@ export default function SocialFeed({
           </div>
         </div>
 
-        {/* Action Button: Clean news redirect (No icons inside button, exact rounded-[10px]) */}
+        {/* Action Button: Follow on Instagram (No icons inside button, exact rounded-[10px]) */}
         <div className="text-center mt-10 md:mt-12">
           <a
             href={profileUrl}
@@ -294,7 +294,7 @@ export default function SocialFeed({
             rel="noopener noreferrer"
             className="inline-flex items-center justify-center bg-[#B21816] hover:bg-[#991412] text-white text-xs uppercase tracking-widest font-bold px-9 py-4 rounded-[10px] shadow-md hover:shadow-lg transition-all active:scale-95 cursor-pointer"
           >
-            Read Press & Media Coverage
+            Follow on Instagram
           </a>
         </div>
       </div>
